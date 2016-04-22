@@ -69,12 +69,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\albert\Desktop\MyFoo2\Foo\Foo\SDL2_image-2.0.1\include;C:\Users\albert\Desktop\MyFoo2\Foo\Foo\SDL2-2.0.4\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\albert\Desktop\MyFoo2\Foo\Foo\SDL2-2.0.4\lib\x86;C:\Users\albert\Desktop\MyFoo2\Foo\Foo\SDL2_image-2.0.1\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Foo\SDL2_image-2.0.1\include;$(SolutionDir)\Foo\SDL2-2.0.4\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Foo\SDL2-2.0.4\lib\x86;$(SolutionDir)\Foo\SDL2_image-2.0.1\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\albert\Desktop\MyFoo2\Foo\Foo\SDL2_image-2.0.1\include;C:\Users\albert\Desktop\MyFoo2\Foo\Foo\SDL2-2.0.4\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\albert\Desktop\MyFoo2\Foo\Foo\SDL2-2.0.4\lib\x86;C:\Users\albert\Desktop\MyFoo2\Foo\Foo\SDL2_image-2.0.1\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Foo\SDL2_image-2.0.1\include;$(SolutionDir)\Foo\SDL2-2.0.4\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Foo\SDL2-2.0.4\lib\x86;$(SolutionDir)\Foo\SDL2_image-2.0.1\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -123,7 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Foo.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

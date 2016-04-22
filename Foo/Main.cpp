@@ -52,7 +52,15 @@ Dot::Dot()
 
 void Dot::handleEvent(SDL_Event& e)
 {
-
+	//If a key was pressed
+	if (e.type == SDL_KEYDOWN && e.key.repeat == 0) {
+		//Adjust the velocity
+		switch (e.key.keysym.sym) {
+			case SDLK_UP: mVelY -= DOT_VEL; break;
+			case SDLK_DOWN: mVelY;
+			case 
+		}
+	}
 }
 
 //Texture wrapper class
