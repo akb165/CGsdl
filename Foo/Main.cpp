@@ -1,119 +1,22 @@
-//Using SDL, SDL_image, standard IO, and strings
-#include <SDL.h>
-#include <SDL_image.h>
-#include <stdio.h>
-#include <string>
+//ALbert Beranek CG programming
+/////////////////////////////////////////////////////////////////////
 
-//Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-
-//THe Dot that will move around the screen
-class Dot
-{
-public:
-	//The dimensions of dot
-	static const int DOT_WIDTH = 20;
-	static const int DOT_HEIGHT = 20;
-
-	//Maximum axis velocity of dot
-	static const int DOT_VEL = 10;
-
-	//Initialize Varible
-	Dot();
-
-	//Takes key preses and adjusts the dot's vel
-	void handleEvent(SDL_Event& e);
-
-	//Moves the dot
-	void move();
-
-	//Shows dot on screen
-	void render();
-
-private:
-	//the X and Y offsets of Dot
-	int mPosX, mPosY;
-
-	//The velocity of the Dot
-	int mVelx, mVelY;
-};
-
-Dot::Dot()
-{
-	//Inti the offsets
-	mPosX = 0;
-	mPosY = 0;
-
-	//Init velocity
-	mVelx = 0;
-	mVelY = 0;
-}
-
-void Dot::handleEvent(SDL_Event& e)
-{
-	//If a key was pressed
-	if (e.type == SDL_KEYDOWN && e.key.repeat == 0) {
-		//Adjust the velocity
-		switch (e.key.keysym.sym) {
-		case SDLK_UP: mVelY -= DOT_VEL; break;
-		case SDLK_DOWN: mVelY += DOT_VEL; break;
-		case SDLK_LEFT: mVelx -= DOT_VEL; break;
-		case SDLK_RIGHT: mVelx += DOT_VEL; break;
-		}
-	}
-	else if (e.type == SDL_KEYUP && e.key.repeat == 0) {
-		//Adjust the velocity
-		switch (e.key.keysym.sym) {
-		case SDLK_UP: mVelY += DOT_VEL; break;
-		case SDLK_DOWN: mVelY -= DOT_VEL; break;
-		case SDLK_LEFT: mVelx += DOT_VEL; break;
-		case SDLK_RIGHT: mVelx -= DOT_VEL; break;
-		}
-	}
-}
-
-void Dot::move() {
-	//Move the dot l or r
-	mPosX += mVelx;
-
-	//if the dot went to far l or r
-	if (mPosX<0 || mPosX + DOT_WIDTH>SCREEN_WIDTH){
-		//Move back
-		mPosX -= mVelx;
-	}
-	mPosY += mVelY;
-
-	//if the dot went to far u or d
-	if (mPosY<0 || mPosY + DOT_HEIGHT>SCREEN_HEIGHT){
-	//Move back
-	mPosY -= mVelY;
-	}
-}
-
-void Dot::render() {
-	//Show the dot
-	gDownTexture.render(mPosX, mPosY);
-
-}
+#include "SDLInit.h"
 
 //Texture wrapper class
-class LTexture
-{
+class LTexture {
 public:
-	//Initializes variables
+	//Init varibles
 	LTexture();
 
-	//Deallocates memory
+	//Deallocate memory
 	~LTexture();
 
-	//Loads image at specified path
+	//Loads image at specified Path
 	bool loadFromFile(std::string path);
 
-#ifdef _SDL_TTF_H
-	//Creates image from font string
+	//Create image from font string
 	bool loadFromRenderedText(std::string textureText, SDL_Color textColor);
-#endif
 
 	//Deallocates texture
 	void free();
@@ -152,18 +55,26 @@ bool loadMedia();
 //Frees media and shuts down SDL
 void close();
 
+//Loads individual image
+extern SDL_Surface* loadSurface(std::string path);
+
 //The window we'll be rendering to
-SDL_Window* gWindow = NULL;
+extern SDL_Window* gWindow;
+
+//The surface contained by the window
+extern SDL_Surface* gScreenSurface;
+
+//Current displayed PNG image
+extern SDL_Surface* gPNGSurface;
 
 //The window renderer
-SDL_Renderer* gRenderer = NULL;
+extern SDL_Renderer* gRenderer = NULL;
 
-//Scene textures
-LTexture gPressTexture;
-LTexture gUpTexture;
-LTexture gDownTexture;
-LTexture gLeftTexture;
-LTexture gRightTexture;
+//Globally used font
+extern TTF_Font *gFont = NULL;
+
+//Rendered texture
+LTexture gTextTexture;
 
 LTexture::LTexture()
 {
@@ -220,7 +131,6 @@ bool LTexture::loadFromFile(std::string path)
 	return mTexture != NULL;
 }
 
-#ifdef _SDL_TTF_H
 bool LTexture::loadFromRenderedText(std::string textureText, SDL_Color textColor)
 {
 	//Get rid of preexisting texture
@@ -228,7 +138,11 @@ bool LTexture::loadFromRenderedText(std::string textureText, SDL_Color textColor
 
 	//Render text surface
 	SDL_Surface* textSurface = TTF_RenderText_Solid(gFont, textureText.c_str(), textColor);
-	if (textSurface != NULL)
+	if (textSurface == NULL)
+	{
+		printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
+	}
+	else
 	{
 		//Create texture from surface pixels
 		mTexture = SDL_CreateTextureFromSurface(gRenderer, textSurface);
@@ -246,16 +160,10 @@ bool LTexture::loadFromRenderedText(std::string textureText, SDL_Color textColor
 		//Get rid of old surface
 		SDL_FreeSurface(textSurface);
 	}
-	else
-	{
-		printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
-	}
-
 
 	//Return success
 	return mTexture != NULL;
 }
-#endif
 
 void LTexture::free()
 {
@@ -312,200 +220,192 @@ int LTexture::getHeight()
 {
 	return mHeight;
 }
-
 bool init()
 {
+
 	//Initialization flag
 	bool success = true;
 
-	//Initialize SDL
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	{
-		printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
-		success = false;
-	}
-	else
-	{
-		//Set texture filtering to linear
-		if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
-		{
-			printf("Warning: Linear texture filtering not enabled!");
-		}
+	////Initialize SDL
+	//if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	//{
+	//	printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
+	//	success = false;
+	//}
+	//else
+	//{
+	//	//Create window
+	//	gWindow = SDL_CreateWindow("Tetris Twist", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	//	if (gWindow == NULL)
+	//	{
+	//		printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
+	//		success = false;
+	//	}
+	//	else
+	//	{
+	//		//Initialize PNG loading
+	//		int imgFlags = IMG_INIT_PNG;
+	//		if (!(IMG_Init(imgFlags) & imgFlags))
+	//		{
+	//			printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+	//			success = false;
+	//		}
+	//		else
+	//		{
+	//			//Get window surface
+	//			gScreenSurface = SDL_GetWindowSurface(gWindow);
+	//		}
 
-		//Create window
-		gWindow = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-		if (gWindow == NULL)
-		{
-			printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
-			success = false;
-		}
-		else
-		{
-			//Create vsynced renderer for window
-			gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-			if (gRenderer == NULL)
-			{
-				printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
-				success = false;
-			}
-			else
-			{
-				//Initialize renderer color
-				SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-
-				//Initialize PNG loading
-				int imgFlags = IMG_INIT_PNG;
-				if (!(IMG_Init(imgFlags) & imgFlags))
-				{
-					printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
-					success = false;
-				}
-			}
-		}
-	}
+	//		//Initialize SDL_ttf
+	//		if (TTF_Init() == -1)
+	//		{
+	//			printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+	//			success = false;
+	//		}
+	//	}
+	//}
 
 	return success;
 }
 
 bool loadMedia()
 {
-	//Loading success flag
-	bool success = true;
+	////Loading success flag
+	//bool success = true;
 
-	//Load press texture
-	if (!gPressTexture.loadFromFile("press.png"))
-	{
-		printf("Failed to load press texture!\n");
-		success = false;
-	}
+	////Load PNG surface
+	//gPNGSurface = loadSurface("LevelBackground.png");
+	//if (gPNGSurface == NULL)
+	//{
+	//	printf("Failed to load PNG image!\n");
+	//	success = false;
+	//}
 
-	//Load up texture
-	if (!gUpTexture.loadFromFile("up.png"))
-	{
-		printf("Failed to load up texture!\n");
-		success = false;
-	}
+	////Open the font
+	//gFont = TTF_OpenFont("lazy.ttf", 28);
+	//if (gFont == NULL) {
+	//	printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
+	//	success = false;
+	//}
+	//else {
+	//	SDL_Color textColor = { 0,0,0 };
+	//	if (!gTextTexture.loadFromRenderedText("next", textColor)) {
+	//		printf("Failed to render text texture!\n");
+	//		success = false;
+	//	}
+	//}
 
-	//Load down texture
-	if (!gDownTexture.loadFromFile("down.png"))
-	{
-		printf("Failed to load down texture!\n");
-		success = false;
-	}
-
-	//Load left texture
-	if (!gLeftTexture.loadFromFile("left.png"))
-	{
-		printf("Failed to load left texture!\n");
-		success = false;
-	}
-
-	//Load right texture
-	if (!gRightTexture.loadFromFile("right.png"))
-	{
-		printf("Failed to load right texture!\n");
-		success = false;
-	}
-
-	return success;
+	//return success;
 }
 
 void close()
 {
-	//Free loaded images
-	gPressTexture.free();
-	gUpTexture.free();
-	gDownTexture.free();
-	gLeftTexture.free();
-	gRightTexture.free();
+	//Free loaded image
+	SDL_FreeSurface(gPNGSurface);
+	gPNGSurface = NULL;
 
-	//Destroy window	
+	//Free global font
+	TTF_CloseFont(gFont);
+	gFont = NULL;
+
+	//Destroy window
 	SDL_DestroyRenderer(gRenderer);
 	SDL_DestroyWindow(gWindow);
 	gWindow = NULL;
 	gRenderer = NULL;
 
 	//Quit SDL subsystems
+	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }
 
-int main(int argc, char* args[])
+SDL_Surface* loadSurface(std::string path)
 {
-	//Start up SDL and create window
-	if (!init())
+	//The final optimized image
+	SDL_Surface* optimizedSurface = NULL;
+
+	//Load image at specified path
+	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+	if (loadedSurface == NULL)
 	{
-		printf("Failed to initialize!\n");
+		printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
 	}
 	else
 	{
-		//Load media
-		if (!loadMedia())
+		//Convert surface to screen format
+		optimizedSurface = SDL_ConvertSurface(loadedSurface, gScreenSurface->format, NULL);
+		if (optimizedSurface == NULL)
 		{
-			printf("Failed to load media!\n");
+			printf("Unable to optimize image %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
 		}
-		else
-		{
-			//Main loop flag
-			bool quit = false;
 
-			//Event handler
-			SDL_Event e;
-
-			//Current rendered texture
-			LTexture* currentTexture = NULL;
-
-			//While application is running
-			while (!quit)
-			{
-				//Handle events on queue
-				while (SDL_PollEvent(&e) != 0)
-				{
-					//User requests quit
-					if (e.type == SDL_QUIT)
-					{
-						quit = true;
-					}
-				}
-
-				//Set texture based on current keystate
-				const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
-				if (currentKeyStates[SDL_SCANCODE_UP])
-				{
-					currentTexture = &gUpTexture;
-				}
-				else if (currentKeyStates[SDL_SCANCODE_DOWN])
-				{
-					currentTexture = &gDownTexture;
-				}
-				else if (currentKeyStates[SDL_SCANCODE_LEFT])
-				{
-					currentTexture = &gLeftTexture;
-				}
-				else if (currentKeyStates[SDL_SCANCODE_RIGHT])
-				{
-					currentTexture = &gRightTexture;
-				}
-				else
-				{
-					currentTexture = &gPressTexture;
-				}
-
-				//Clear screen
-				SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-				SDL_RenderClear(gRenderer);
-
-				//Render current texture
-				currentTexture->render(0, 0);
-
-				//Update screen
-				SDL_RenderPresent(gRenderer);
-			}
-		}
+		//Get rid of old loaded surface
+		SDL_FreeSurface(loadedSurface);
 	}
 
-	//Free resources and close SDL
-	close();
+	return optimizedSurface;
+}
+
+int main(int argc, char* args[])
+{
+	////Start up SDL and create window
+	//SDLInit sdlInit;
+
+	//if (!sdlInit.Setup())
+	//{
+	//	printf("Failed to initialize!\n");
+	//}
+	//else
+	//{
+	//	//Load media
+	//	if (!loadMedia())
+	//	{
+	//		printf("Failed to load media!\n");
+	//	}
+	//	else
+	//	{
+	//		////Main loop flag
+	//		//bool quit = false;
+
+	//		////Event handler
+	//		//SDL_Event e;
+
+	//		//While application is running
+	//		//while (!quit)
+	//		//{
+	//		//	//Handle events on queue
+	//		//	while (SDL_PollEvent(&e) != 0)
+	//		//	{
+	//		//		//User requests quit
+	//		//		if (e.type == SDL_QUIT)
+	//		//		{
+	//		//			quit = true;
+	//		//		}
+	//		//	}
+
+	//		//	//Apply the PNG image
+	//		//	SDL_BlitSurface(gPNGSurface, NULL, gScreenSurface, NULL);
+
+	//		//	//Update the surface
+	//		//	SDL_UpdateWindowSurface(gWindow);
+
+	//		//	//Clear screen
+	//		//	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	//		//	SDL_RenderClear(gRenderer);
+
+	//		//	//Render current frame
+	//		//	gTextTexture.render((SCREEN_WIDTH - gTextTexture.getWidth()) / 2, (SCREEN_HEIGHT - gTextTexture.getHeight()) / 2);
+
+	//		//	//Update screen
+	//		//	SDL_RenderPresent(gRenderer);
+
+	//		//}
+	//	}
+	//}
+
+	////Free resources and close SDL
+	//close();
 
 	return 0;
 }
