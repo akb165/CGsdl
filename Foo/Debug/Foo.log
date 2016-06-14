@@ -1,3 +1,12 @@
-﻿  Main.cpp
-  Foo.vcxproj -> C:\Users\albert\Desktop\MyFoo2\Foo\Debug\Foo.exe
-  Foo.vcxproj -> C:\Users\albert\Desktop\MyFoo2\Foo\Debug\Foo.pdb (Partial PDB)
+﻿  SDLInit.cpp
+  Main.cpp
+  GameManager.cpp
+  GameData.cpp
+  Character.cpp
+c:\users\albert\desktop\myfoo2\foo\foo\character.cpp(87): error C2059: syntax error: 'return'
+c:\users\albert\desktop\myfoo2\foo\foo\character.cpp(89): error C2059: syntax error: 'else'
+c:\users\albert\desktop\myfoo2\foo\foo\character.cpp(89): error C2143: syntax error: missing ';' before '{'
+c:\users\albert\desktop\myfoo2\foo\foo\character.cpp(89): error C2447: '{': missing function header (old-style formal list?)
+c:\users\albert\desktop\myfoo2\foo\foo\character.cpp(92): error C2059: syntax error: '}'
+c:\users\albert\desktop\myfoo2\foo\foo\character.cpp(92): error C2143: syntax error: missing ';' before '}'
+  Generating Code...

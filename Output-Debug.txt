@@ -1,0 +1,74 @@
+﻿'Foo.exe' (Win32): Loaded 'C:\Users\albert\Desktop\MyFoo2\Foo\Debug\Foo.exe'. Symbols loaded.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\ntdll.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\kernel32.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\KernelBase.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Users\albert\Desktop\MyFoo2\Foo\Foo\SDL2_image.dll'. Module was built without symbols.
+'Foo.exe' (Win32): Loaded 'C:\Users\albert\Desktop\MyFoo2\Foo\Foo\SDL2_ttf.dll'. Module was built without symbols.
+'Foo.exe' (Win32): Loaded 'C:\Users\albert\Desktop\MyFoo2\Foo\Foo\SDL2.dll'. Module was built without symbols.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\msvcp140d.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\msvcrt.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\gdi32.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\user32.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\vcruntime140d.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\ucrtbased.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\advapi32.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\imm32.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\sechost.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\ole32.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\rpcrt4.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Users\albert\Desktop\MyFoo2\Foo\Foo\libfreetype-6.dll'. Module was built without symbols.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\combase.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\sspicli.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\bcryptprimitives.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\cryptbase.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Users\albert\Desktop\MyFoo2\Foo\Foo\zlib1.dll'. Module was built without symbols.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\oleaut32.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\shell32.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\cfgmgr32.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\windows.storage.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\shlwapi.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\kernel.appcore.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\SHCore.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\powrprof.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\profapi.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\winmm.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\version.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\winmmbase.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\winmmbase.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Unloaded 'C:\Windows\syswow64\winmmbase.dll'
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\uxtheme.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\msctf.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Program Files (x86)\Common Files\Microsoft Shared\ink\tiptsf.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\dwmapi.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\clbcatq.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\d3d9.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\igdumdim32.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\setupapi.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\rmclient.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Unloaded 'C:\Windows\syswow64\rmclient.dll'
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\igdusc32.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Users\albert\Desktop\MyFoo2\Foo\Foo\libpng16-16.dll'. Module was built without symbols.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\UIAutomationCore.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\userenv.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\sxs.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\oleacc.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\twinapi.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\twinapi.appcore.dll'. Cannot find or open the PDB file.
+'Foo.exe' (Win32): Loaded 'C:\Windows\syswow64\bcrypt.dll'. Cannot find or open the PDB file.
+The thread 0x12704 has exited with code 0 (0x0).
+'Foo.exe' (Win32): Unloaded 'C:\Windows\syswow64\igdusc32.dll'
+The thread 0xa298 has exited with code 0 (0x0).
+The thread 0x4f7c has exited with code 0 (0x0).
+'Foo.exe' (Win32): Unloaded 'C:\Windows\syswow64\setupapi.dll'
+'Foo.exe' (Win32): Unloaded 'C:\Windows\syswow64\igdumdim32.dll'
+'Foo.exe' (Win32): Unloaded 'C:\Windows\syswow64\d3d9.dll'
+'Foo.exe' (Win32): Unloaded 'C:\Users\albert\Desktop\MyFoo2\Foo\Foo\libpng16-16.dll'
+The thread 0x11ee8 has exited with code 0 (0x0).
+The thread 0xc344 has exited with code 0 (0x0).
+The thread 0xf5a8 has exited with code 0 (0x0).
+The thread 0x81b4 has exited with code 0 (0x0).
+The thread 0x98ac has exited with code 0 (0x0).
+The thread 0x6060 has exited with code 0 (0x0).
+The thread 0x10edc has exited with code 0 (0x0).
+The thread 0xfa04 has exited with code 0 (0x0).
+The program '[38404] Foo.exe' has exited with code 0 (0x0).
